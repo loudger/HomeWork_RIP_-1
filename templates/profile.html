@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Профиль {% endblock %}
+
+{% block content %}
+  <nav class="nav" style="margin-bottom: 20px;">
+    <div class="nav-left">
+      <div class="tabs">
+        <a href="/cars/">Все автомобили</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="/profile/">Личная страница</a>
+      <a href="/logout/">Выйти</a>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="col-4">
+      <img src="/media/{{ object.image }}" class="profile_image">
+    </div>
+    <div class="col">
+      <h2>{{ object.username }}</h2>
+      <p><b>Любимая марка:</b> {{ object.favorite_brand }}</p>
+      <p><b>О себе:</b></p>
+      <p>{{ object.about_me }}</p>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "registration/base_without_nav.html" %}
+
+{% block content %}
+  {% if form.errors %}
+  <p>Неверное имя пользователя или пароль. Проверьте правильность введенных данных.</p>
+  {% endif %}
+
+  {% if next %}
+      {% if user.is_authenticated %}
+      <p>Ваш аккаунт не имеет доступа к этой странице.</p>
+      {% else %}
+      <p>Пожалуйста, войдите, чтобы видеть эту страницу.</p>
+      {% endif %}
+  {% endif %}
+
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Войти">
+    <input type="hidden" name="next" value="{{ next }}">
+  </form>
+  <div style="margin-top: 20px;"><p style="margin-bottom: 0; ">Еще не зарегистрированы?</p><a href="/register/" >Зарегистрироваться</a></div>
+{% endblock %}

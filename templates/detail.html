@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ object.title }} {% endblock %}
+
+{% block content %}
+  <nav class="nav" style="margin-bottom: 20px;">
+    <div class="nav-left">
+      <div class="tabs">
+        <a href="/cars/">Все автомобили</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="/profile/">Личная страница</a>
+      <a href="/logout/">Выйти</a>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="col-4">
+      <img src="/media/{{ car.image }}" class="detail_image">
+    </div>
+    <div class="col">
+    <h3>{{ object.title }}</h3>
+    <ul>
+      <li>Марка: {{ object.brand }}</li>
+      <li>Пробег: {{ object.mileage }}</li>
+      {% if object.year %}
+        <li>Год выпуска: {{ object.year }}</li>
+      {% endif %}
+      {% if object.gas %}
+        <li>Объём бензобака: {{ object.gas }}</li>
+      {% endif %}
+    </ul>
+    <a href="order/" class="button primary" id="order"> Тест драйв! </a>
+    <h5 class="order_text">Очередь:</h5>
+    {% if not users_list %}
+      <p id="noone">Никого!</p>
+    {% endif %}
+    <ul id="users">
+    {% for user in users_list %}
+      <div class="row">
+        <div class="col-1">
+          <img src="/media/{{ user.image }}" style="height: 40px;">
+        </div>
+        <div class="col">
+          <a href="/profile/{{ user.id }}/"><h5>{{ user.username }}</h5></a>
+        </div>
+      </div>
+    {% endfor %}
+    </ul>
+  </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="/static/core/order.js"></script>
+{% endblock %}

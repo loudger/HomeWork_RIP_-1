@@ -1,0 +1,10 @@
+{% for car in car_list %}
+  <div class="row">
+    <div class="col-2"><img src="/media/{{ car.image }}" class="list_image"></div>
+    <div class="col">
+      <a href="/cars/{{ car.id }}/">
+        <h2>{{ car.title }}</h2></a>
+        <h4>{{ car.brand }}</h4>
+    </div>
+  </div>
+{% endfor %}

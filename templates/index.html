@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Все автомобили{% endblock %}
+
+{% block content %}
+  <nav class="nav" style="margin-bottom: 20px;">
+    <div class="nav-left">
+      <div class="tabs">
+        <a href="/cars/">Все автомобили</a>
+        <a href="#" id="myBtn">Выставить автомобиль</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="/profile/">Личная страница</a>
+      <a href="/logout/">Выйти</a>
+    </div>
+  </nav>
+  {% if car_list %}
+    <div id="cars">
+      {% for car in car_list %}
+        <div class="row">
+          <div class="col-2"><img src="/media/{{ car.image }}" class="list_image"></div>
+          <div class="col">
+            <a href="/cars/{{ car.id }}/">
+              <h2>{{ car.title }}</h2></a>
+              <h4>{{ car.brand }}</h4>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+      <h3>Авто</h3>
+      <p>Авто нет!</p>
+    {% endif %}
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form method="post" enctype="multipart/form-data" id="form_create">
+          {% csrf_token %}
+          {{ form_create.as_p }}
+          <input type="submit" value="Добавить" id="add">
+        </form>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/static/core/cars.js"></script>
+    <script src="/static/core/create.js"></script>
+{% endblock %}
